@@ -19,6 +19,30 @@ spec:
         image: hugosmn5/backend-3-tier:1.1
         ports:
         - containerPort: 5000
+
+        # ✅ QoS Guaranteed
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
         env:
         - name: DB_USER
           value: "admin"
@@ -31,6 +55,7 @@ spec:
           value: "reviews"
         - name: DB_HOST
           value: "postgresql"
+
 ---
 apiVersion: v1
 kind: Service

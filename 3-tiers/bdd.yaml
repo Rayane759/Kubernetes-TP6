@@ -34,6 +34,27 @@ spec:
         ports:
         - containerPort: 5432
 
+        # ✅ QoS Guaranteed
+        resources:
+          requests:
+            cpu: "300m"
+            memory: "512Mi"
+          limits:
+            cpu: "300m"
+            memory: "512Mi"
+
+        livenessProbe:
+          tcpSocket:
+            port: 5432
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+        readinessProbe:
+          tcpSocket:
+            port: 5432
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
         envFrom:
         - configMapRef:
             name: bdd-config
