@@ -4,5 +4,4 @@ metadata:
   name: bdd-config
 data: 
   POSTGRES_USER: "admin"
-  POSTGRES_PASSWORD: "password"
   POSTGRES_DB: "reviews"

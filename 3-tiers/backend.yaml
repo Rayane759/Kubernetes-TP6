@@ -23,7 +23,10 @@ spec:
         - name: DB_USER
           value: "admin"
         - name: DB_PASS
-          value: "password"
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
         - name: DB
           value: "reviews"
         - name: DB_HOST
